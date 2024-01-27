@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+.section1 {
+  background-image: url("./assets/images/mobile/image-hero.jpg");
+}
+
+@media (min-width: 768px) {
+  .section1 {
+    background-image: url("./assets/images/desktop/image-hero.jpg");
+  }
+}
