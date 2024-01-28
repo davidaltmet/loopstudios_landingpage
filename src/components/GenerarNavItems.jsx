@@ -11,7 +11,7 @@ export const generarNavItems = () => {
     return (
       <li
         key={index}
-        className="relative w-full group text-white text-center cursor-pointer"
+        className="relative w-full group text-white md:text-center cursor-pointer"
       >
         <a href={`#${item.sectionId}`}>{item.text}</a>
         <div className="w-0 h-1  bg-white absolute top-6 bottom-0 left-0 rounded group-hover:w-full transition-all duration-300 mt-2 md:mt-0 "></div>

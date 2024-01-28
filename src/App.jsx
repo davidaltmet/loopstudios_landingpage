@@ -4,12 +4,14 @@ import Creation from "./components/Creation";
 import Footer from "./components/Footer";
 import { useState, useEffect, useRef } from "react";
 
+import Loading from "./components/Loading";
+
 const efectContHeader = () => {
   const [showAside, setShowAside] = useState(false);
   useEffect(() => {
     const timeout = setTimeout(() => {
       setShowAside(true);
-    }, 500);
+    }, 3000);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -17,31 +19,51 @@ const efectContHeader = () => {
   return { showAside };
 };
 
+const efectoLoading = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simula una carga de datos
+    setTimeout(() => {
+      setLoading(false);
+    }, 2500);
+  }, []);
+
+  return { loading };
+};
+
 function App() {
   const { showAside } = efectContHeader();
+  const { loading } = efectoLoading();
 
   return (
     <div className="contenedor_principal overflow-hidden ">
-      <div
-        id="hero"
-        className="section1 flex flex-col  md:block items-center w-full h-screen p-6 md:p-0 md:py-12 md:px-16 xl:py-12 xl:px-32 overflow-hidden bg-center bg-cover md:bg-cover"
-      >
-        <Header />
-        <div
-          className={`h-full flex  items-center w-full  md:w-1/2  uppercase tracking-widest transform ${
-            showAside
-              ? "translate-x-0 opacity-100"
-              : "-translate-x-full opacity-0"
-          } duration-500`}
-        >
-          <h1 className=" font-alata text-4xl lg:text-6xl py-10 pl-5 pr-8 border-4 text-white">
-            Immersive experiences that deliver
-          </h1>
-        </div>
-      </div>
-      <Info />
-      <Creation />
-      <Footer />
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <div
+            id="hero"
+            className="section1 flex flex-col  md:block items-center w-full h-screen p-6 md:p-0 md:py-12 md:px-16 xl:py-12 xl:px-32 overflow-hidden bg-center bg-cover md:bg-cover"
+          >
+            <Header />
+            <div
+              className={`h-full flex  items-center w-full  md:w-1/2  uppercase tracking-widest transform ${
+                showAside
+                  ? "translate-x-0 opacity-100"
+                  : "-translate-x-full opacity-0"
+              } duration-500`}
+            >
+              <h1 className=" font-alata text-4xl lg:text-6xl py-10 pl-5 pr-8 border-4 text-white">
+                Immersive experiences that deliver
+              </h1>
+            </div>
+          </div>
+          <Info />
+          <Creation />
+          <Footer />
+        </>
+      )}
     </div>
   );
 }
